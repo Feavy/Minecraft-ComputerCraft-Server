@@ -1,0 +1,42 @@
+name: Deploy to Kubernetes cluster
+
+on:
+  push:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Configure Docker Buildx
+        run: |
+          docker buildx create --name mybuilder
+          docker buildx use mybuilder
+          docker buildx inspect --bootstrap
+
+      - uses: feavy/deploy@main
+        env:
+          DOCKERFILE_PATH: .
+          DOCKER_IMAGE: computercraft:latest
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+          GITHUB_USERNAME: feavy
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+          DEPLOYMENT: deployment.yml
+          MINECRAFT_TOKEN: "to set"
+          MINECRAFT_CHANNEL: "427561263485419531"
+          PLATFORM: arm64
+
+      - name: Restart deployment
+        run: kubectl rollout restart deployment computercraft --namespace minecraft

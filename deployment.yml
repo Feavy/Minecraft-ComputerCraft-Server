@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: minecraft
+---
+#apiVersion: v1
+#kind: ConfigMap
+#metadata:
+#  name: computercraft-config
+#  namespace: minecraft
+#data:
+#  MINECRAFT_CHANNEL: "${MINECRAFT_CHANNEL}"
+#---
+#apiVersion: v1
+#kind: Secret
+#metadata:
+#  name: computercraft-secret
+#  namespace: minecraft
+#type: Opaque
+#stringData:
+#  MINECRAFT_TOKEN: "${MINECRAFT_TOKEN}"
+#---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: computercraft
+  namespace: minecraft
+  labels:
+    k8s-app: computercraft
+spec:
+  selector:
+    matchLabels:
+      k8s-app: computercraft
+  template:
+    metadata:
+      labels:
+        k8s-app: computercraft
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: 'oracle-paris'
+      hostNetwork: true # Ou possible avec hostPort
+      containers:
+        - name: computercraft
+          image: ${DOCKER_IMAGE}
+          envFrom:
+            - configMapRef:
+                name: computercraft-config
+            - secretRef:
+                name: computercraft-secret
+          volumeMounts:
+            - mountPath: /etc/minecraft
+              name: minecraft-data
+          imagePullPolicy: Always
+      volumes:
+        - name: minecraft-data
+          hostPath:
+            path: /mnt/computercraft
+      imagePullSecrets:
+        - name: regcred
