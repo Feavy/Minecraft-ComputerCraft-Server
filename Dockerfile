@@ -18,10 +18,11 @@ RUN curl -LJ https://meta.fabricmc.net/v2/versions/loader/1.19.3/0.14.17/0.11.2/
 # DOWNLOAD MODS
 RUN cd /etc/template/mods \
   && curl -LJO https://mediafilez.forgecdn.net/files/4409/848/fabric-api-0.75.1%2B1.19.3.jar \
-  && curl -LJO https://mediafilez.forgecdn.net/files/4395/619/cc-tweaked-1.19.2-1.101.2.jar \
+  && curl -LJO https://mediafilez.forgecdn.net/files/4153/752/cc-restitched-1.102.0.jar \
   && curl -LJO https://mediafilez.forgecdn.net/files/4415/833/Plethora-Fabric-1.4.6.jar \
   && curl -LJO https://mediafilez.forgecdn.net/files/4343/754/trinkets-3.5.1.jar \
-  && curl -LJO https://mediafilez.forgecdn.net/files/4404/823/AdvancedPeripherals-0.7.25b.jar
+  && curl -LJO https://mediafilez.forgecdn.net/files/4404/823/AdvancedPeripherals-0.7.25b.jar \
+  && curl -LJO https://mediafilez.forgecdn.net/files/4030/849/fabric-language-kotlin-1.8.5%2Bkotlin.1.7.20.jar
 
 WORKDIR /etc/template
 
