@@ -22,8 +22,9 @@ RUN cd /etc/template/mods \
   && curl -LJO https://mediafilez.forgecdn.net/files/4380/203/Plethora-Fabric-1.4.5.jar \
   && curl -LJO https://mediafilez.forgecdn.net/files/4343/754/trinkets-3.5.1.jar \
   && curl -LJO https://mediafilez.forgecdn.net/files/4404/823/AdvancedPeripherals-0.7.25b.jar \
-  && curl -LJO https://mediafilez.forgecdn.net/files/4030/849/fabric-language-kotlin-1.8.5%2Bkotlin.1.7.20.jar \
-  && curl -LJO https://cdn.modrinth.com/data/MLYQ9VGP/versions/hECmroH4/Cardboard-1.19.2.jar
+  && curl -LJO https://mediafilez.forgecdn.net/files/4030/849/fabric-language-kotlin-1.8.5%2Bkotlin.1.7.20.jar
+#  && curl -LJO https://cdn.modrinth.com/data/SVKv1SZo/versions/VnksYUlo/iCommon-Fabric-1.19.2.jar
+#  && curl -LJO https://cdn.modrinth.com/data/MLYQ9VGP/versions/hECmroH4/Cardboard-1.19.2.jar
 
 WORKDIR /etc/template
 
